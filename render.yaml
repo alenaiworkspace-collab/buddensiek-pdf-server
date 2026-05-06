@@ -2,9 +2,11 @@ services:
   - type: web
     name: buddensiek-pdf-server
     runtime: python
-    pythonVersion: "3.11"
-    buildCommand: "./build.sh"
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt && playwright install chromium && playwright install-deps chromium"
     startCommand: "uvicorn generate_pdf:app --host 0.0.0.0 --port $PORT"
     plan: free
     healthCheckPath: /
     autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0
