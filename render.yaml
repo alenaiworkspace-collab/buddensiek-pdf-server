@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: buddensiek-pdf-server
+    runtime: python
+    pythonVersion: "3.11"
+    buildCommand: "./build.sh"
+    startCommand: "uvicorn generate_pdf:app --host 0.0.0.0 --port $PORT"
+    plan: free
+    healthCheckPath: /
+    autoDeploy: true
